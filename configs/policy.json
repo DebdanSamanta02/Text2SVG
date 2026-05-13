@@ -1,5 +1,5 @@
 {
-  "model_name_or_path": "Qwen/Qwen3-8B",
+  "model_name_or_path": "Qwen/Qwen3-4B",
   "tokenizer_name_or_path": null,
   "trust_remote_code": true,
   "gradient_checkpointing": true,

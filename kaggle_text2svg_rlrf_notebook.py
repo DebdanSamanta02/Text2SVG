@@ -195,9 +195,9 @@ print("Illustration eval captions:", len(eval_illustrations))
 # %% [markdown]
 # ## Inspect the scaled experiment config
 #
-# The current default favors getting visible SVGs over doing much RL:
-# Qwen3-8B 4-bit LoRA, Qwen2.5-VL-3B judge, 8 GRPO steps, batch size 1,
-# and 2 rollouts per caption.
+# The current default favors getting visible SVGs without the memory pressure of
+# Qwen3-8B: Qwen3-4B 4-bit LoRA, Qwen2.5-VL-3B judge, 8 GRPO steps,
+# batch size 1, 2 rollouts per caption, and 768 generation tokens.
 
 # %%
 sys.path.insert(0, str(PROJECT_ROOT))
