@@ -5,7 +5,7 @@
     "/kaggle/working/text2svg_captions/mm_icons_eval_captions.txt",
     "/kaggle/working/text2svg_captions/mm_illustrations_eval_captions.txt"
   ],
-  "max_captions": 8,
+  "max_captions": 24,
   "candidates_per_caption": 1,
   "judge_model_name_or_path": "Qwen/Qwen2.5-VL-3B-Instruct",
   "metrics": [

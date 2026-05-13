@@ -1,6 +1,6 @@
 {
-  "train_steps": 8,
-  "batch_size": 1,
+  "train_steps": 20,
+  "batch_size": 2,
   "rollouts_per_caption": 2,
   "learning_rate": 2e-5,
   "lr_decay": 0.7,

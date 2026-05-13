@@ -195,9 +195,9 @@ print("Illustration eval captions:", len(eval_illustrations))
 # %% [markdown]
 # ## Inspect the scaled experiment config
 #
-# The current default is the lowest-memory Kaggle path: Qwen3-1.7B 4-bit LoRA,
-# Qwen2.5-VL-3B judge, 8 GRPO steps, batch size 1, 2 rollouts per caption,
-# and 768 generation tokens.
+# The current default is the Kaggle free-tier experiment profile: Qwen3-1.7B
+# 4-bit LoRA, Qwen2.5-VL-3B judge, 20 GRPO steps, batch size 2,
+# 2 rollouts per caption, and 768 generation tokens.
 
 # %%
 sys.path.insert(0, str(PROJECT_ROOT))

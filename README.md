@@ -53,15 +53,15 @@ python3 kaggle_text2svg_rlrf_notebook.py
 ## Kaggle Free-Tier Profile
 
 The default config is intentionally tiny on update count, but uses the stronger
-1.7B policy for the lowest-memory Kaggle path:
+1.7B policy for the Kaggle free-tier experiment profile:
 
 ```text
 policy: Qwen/Qwen3-1.7B
 policy loading: 4-bit QLoRA
 judge: Qwen/Qwen2.5-VL-3B-Instruct
-train captions: 64 max
-GRPO steps: 8
-batch size: 1 caption
+train captions: 768 max
+GRPO steps: 20
+batch size: 2 captions
 rollouts: 2 per caption
 max generation: 768 tokens
 render canvas: 256px
