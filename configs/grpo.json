@@ -19,6 +19,6 @@
   "dynamic_max_length": true,
   "dynamic_len_threshold": 200,
   "dynamic_len_min": 256,
-  "dynamic_len_max": 512,
+  "dynamic_len_max": 768,
   "chars_per_token": 4.0
 }

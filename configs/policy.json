@@ -5,7 +5,7 @@
   "gradient_checkpointing": true,
   "load_in_4bit": true,
   "max_prompt_tokens": 512,
-  "max_new_tokens": 512,
+  "max_new_tokens": 768,
   "temperature": 0.8,
   "top_p": 0.9,
   "repetition_penalty": 1.0,
