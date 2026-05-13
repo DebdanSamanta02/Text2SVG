@@ -1,6 +1,6 @@
 {
-  "train_steps": 20,
-  "batch_size": 2,
+  "train_steps": 8,
+  "batch_size": 1,
   "rollouts_per_caption": 2,
   "learning_rate": 2e-5,
   "lr_decay": 0.7,
@@ -19,6 +19,6 @@
   "dynamic_max_length": true,
   "dynamic_len_threshold": 200,
   "dynamic_len_min": 256,
-  "dynamic_len_max": 768,
+  "dynamic_len_max": 512,
   "chars_per_token": 4.0
 }

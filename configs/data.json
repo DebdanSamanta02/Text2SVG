@@ -3,7 +3,7 @@
     "/kaggle/working/text2svg_captions/flickr30k_captions.txt",
     "/kaggle/working/text2svg_captions/mm_icons_captions.txt"
   ],
-  "unique_captions": 768,
+  "unique_captions": 64,
   "caption_keys": [
     "caption",
     "prompt",

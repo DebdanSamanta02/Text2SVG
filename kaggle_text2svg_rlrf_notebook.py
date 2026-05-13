@@ -129,6 +129,23 @@ if not train_flickr:
         "people sitting around a campfire at night",
         "a white cat sitting on a black mat",
         "a man climbing a mountain",
+        "a blue house with a red roof",
+        "a yellow sun over green hills",
+        "a white cloud in a blue sky",
+        "a brown dog sitting on grass",
+        "a black cat with green eyes",
+        "a red car with black wheels",
+        "a small boat on blue water",
+        "a snowman with a black hat",
+        "a pink flower with green leaves",
+        "a birthday cake with three candles",
+        "a hot air balloon in the sky",
+        "a person holding a red umbrella",
+        "a simple mountain landscape at sunset",
+        "a green cactus in a brown pot",
+        "a blue bird flying over a tree",
+        "a cup of coffee with steam",
+        "a smiling face with round eyes",
     ]
 if not train_icons:
     train_icons = [
@@ -136,11 +153,30 @@ if not train_icons:
         "a yellow emoji wearing a light blue face mask",
         "a purple clipboard with yellow and orange accents",
         "black bars of varying widths arranged like a barcode",
+        "a blue gear settings icon",
+        "a red heart icon on white background",
+        "a green check mark in a circle",
+        "a yellow warning triangle with an exclamation mark",
+        "a gray trash can icon",
+        "a purple music note icon",
+        "a blue envelope mail icon",
+        "a green battery icon half full",
+        "a red location pin icon",
+        "a black magnifying glass search icon",
+        "a blue calendar icon with two rings",
+        "a yellow star icon",
+        "a gray lock icon with a keyhole",
+        "a red shopping cart icon",
+        "a green leaf ecology icon",
+        "a blue phone handset icon",
+        "a purple camera icon",
     ]
 if not eval_illustrations:
     eval_illustrations = [
         "a cyberpunk cityscape at sunset with neon signs",
         "construction workers on scaffolding working on a building",
+        "a simple mountain landscape at sunset",
+        "a birthday cake with three candles",
     ]
 
 (CAPTION_DIR / "flickr30k_captions.txt").write_text("\n".join(train_flickr), encoding="utf-8")
@@ -156,9 +192,9 @@ print("Illustration eval captions:", len(eval_illustrations))
 # %% [markdown]
 # ## Inspect the scaled experiment config
 #
-# The current default is intentionally small for about a few hours of free-tier
-# experimentation: Qwen3-1.7B 4-bit LoRA, Qwen2.5-VL-3B judge, 80 GRPO steps,
-# batch size 2, and 2 rollouts per caption.
+# The current default favors getting visible SVGs over doing much RL:
+# Qwen3-8B 4-bit LoRA, Qwen2.5-VL-3B judge, 8 GRPO steps, batch size 1,
+# and 2 rollouts per caption.
 
 # %%
 sys.path.insert(0, str(PROJECT_ROOT))

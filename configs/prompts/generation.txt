@@ -3,15 +3,47 @@ Generate an SVG image for the following description.
 First think through the scene, layout, objects, colors, and SVG primitives.
 Then output a complete SVG.
 
-Return exactly this structure:
+Return a short plan followed by one complete SVG.
 <think>
-Plan the scene, objects, layout, colors, and SVG structure.
+short plan
 </think>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="384" height="384">
-...
+
+Rules:
+- Do not write ellipses, placeholders, markdown fences, or explanations after the SVG.
+- Do not use <text>, scripts, external images, external links, filters, or raster images.
+- Use simple visible SVG primitives: rect, circle, ellipse, line, path, polygon, polyline.
+- Start with a background <rect width="200" height="200" fill="#ffffff"/>.
+- Keep the SVG compact: 3 to 25 visible elements.
+- The SVG must contain at least three actual visible elements.
+- Use solid hex colors.
+
+Example:
+Description: a red apple icon with a green leaf
+<think>
+Draw a white background, a red round apple body, a small stem, and a green leaf.
+</think>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="256" height="256">
+<rect width="200" height="200" fill="#ffffff"/>
+<circle cx="100" cy="110" r="52" fill="#d93025"/>
+<circle cx="78" cy="98" r="28" fill="#e53935"/>
+<circle cx="122" cy="98" r="28" fill="#e53935"/>
+<rect x="94" y="42" width="12" height="34" rx="5" fill="#6d4c41"/>
+<ellipse cx="126" cy="58" rx="28" ry="13" fill="#43a047" transform="rotate(-25 126 58)"/>
 </svg>
 
-Do not use <text>, scripts, external images, external links, filters, or raster images.
+Example:
+Description: a blue house with a red roof
+<think>
+Use a sky background, blue square house, red triangular roof, door, and windows.
+</think>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="256" height="256">
+<rect width="200" height="200" fill="#e3f2fd"/>
+<rect x="55" y="85" width="90" height="75" fill="#42a5f5"/>
+<polygon points="45,90 100,38 155,90" fill="#c62828"/>
+<rect x="88" y="118" width="24" height="42" fill="#6d4c41"/>
+<rect x="66" y="100" width="20" height="20" fill="#fff59d"/>
+<rect x="116" y="100" width="20" height="20" fill="#fff59d"/>
+</svg>
 
 Description:
 {description}
