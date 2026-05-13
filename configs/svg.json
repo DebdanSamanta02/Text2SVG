@@ -1,0 +1,17 @@
+{
+  "canvas_size": 256,
+  "viewbox_size": 200,
+  "min_svg_chars": 80,
+  "max_svg_chars": 8000,
+  "min_visible_elements": 2,
+  "max_visible_elements": 120,
+  "strip_text_elements": true,
+  "reject_prompt_copy": true,
+  "prompt_copy_min_overlap": 2,
+  "reject_external_refs": true,
+  "reject_scripts": true,
+  "reject_degenerate_viewbox": true,
+  "min_viewbox_span": 10.0,
+  "force_standard_geometry": true,
+  "blank_std_threshold": 2.0
+}

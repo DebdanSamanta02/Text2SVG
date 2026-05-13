@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "r": 8,
+  "alpha": 16,
+  "dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "output_dir": "/kaggle/working/qwen3_text2svg_grpo_lora"
+}

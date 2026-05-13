@@ -1,0 +1,17 @@
+Generate an SVG image for the following description.
+
+First think through the scene, layout, objects, colors, and SVG primitives.
+Then output a complete SVG.
+
+Return exactly this structure:
+<think>
+Plan the scene, objects, layout, colors, and SVG structure.
+</think>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="384" height="384">
+...
+</svg>
+
+Do not use <text>, scripts, external images, external links, filters, or raster images.
+
+Description:
+{description}

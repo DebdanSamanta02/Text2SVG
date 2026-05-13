@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "device": "cuda",
+  "dtype": "float16",
+  "output_dir": "/kaggle/working/text2svg_outputs",
+  "cache_dir": "/kaggle/working/text2svg_cache",
+  "num_workers": 2,
+  "use_fsdp": false,
+  "fsdp_sharding_strategy": "none"
+}

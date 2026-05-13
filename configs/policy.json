@@ -1,0 +1,16 @@
+{
+  "model_name_or_path": "Qwen/Qwen3-1.7B",
+  "tokenizer_name_or_path": null,
+  "trust_remote_code": true,
+  "gradient_checkpointing": true,
+  "load_in_4bit": true,
+  "max_prompt_tokens": 512,
+  "max_new_tokens": 768,
+  "temperature": 1.1,
+  "top_p": 0.95,
+  "repetition_penalty": 1.0,
+  "rollout_backend": "transformers",
+  "allow_transformers_fallback": true,
+  "use_think_trace": true,
+  "prompt_template_file": "prompts/generation.txt"
+}

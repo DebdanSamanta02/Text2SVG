@@ -1,0 +1,11 @@
+accelerate>=0.34.0
+bitsandbytes>=0.43.0
+cairosvg
+pandas
+peft>=0.14.0
+pillow
+qwen-vl-utils
+sentencepiece
+torch
+tqdm
+transformers>=4.51.0

@@ -1,0 +1,3 @@
+Does the image match the description clearly, accurately, and aesthetically pleasing:
+"{description}"
+[Yes/No]
