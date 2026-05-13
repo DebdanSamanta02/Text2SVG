@@ -119,65 +119,68 @@ def harvest_captions(name_hints, limit):
 
 CAPTION_DIR.mkdir(parents=True, exist_ok=True)
 
+SIMPLE_FLICKR_CAPTIONS = [
+    "two young girls riding red tricycles",
+    "people sitting around a campfire at night",
+    "a white cat sitting on a black mat",
+    "a man climbing a mountain",
+    "a blue house with a red roof",
+    "a yellow sun over green hills",
+    "a white cloud in a blue sky",
+    "a brown dog sitting on grass",
+    "a black cat with green eyes",
+    "a red car with black wheels",
+    "a small boat on blue water",
+    "a snowman with a black hat",
+    "a pink flower with green leaves",
+    "a birthday cake with three candles",
+    "a hot air balloon in the sky",
+    "a person holding a red umbrella",
+    "a simple mountain landscape at sunset",
+    "a green cactus in a brown pot",
+    "a blue bird flying over a tree",
+    "a cup of coffee with steam",
+    "a smiling face with round eyes",
+]
+
+SIMPLE_ICON_CAPTIONS = [
+    "a red apple icon with a green leaf",
+    "a yellow emoji wearing a light blue face mask",
+    "a purple clipboard with yellow and orange accents",
+    "black bars of varying widths arranged like a barcode",
+    "a blue gear settings icon",
+    "a red heart icon on white background",
+    "a green check mark in a circle",
+    "a yellow warning triangle with an exclamation mark",
+    "a gray trash can icon",
+    "a purple music note icon",
+    "a blue envelope mail icon",
+    "a green battery icon half full",
+    "a red location pin icon",
+    "a black magnifying glass search icon",
+    "a blue calendar icon with two rings",
+    "a yellow star icon",
+    "a gray lock icon with a keyhole",
+    "a red shopping cart icon",
+    "a green leaf ecology icon",
+    "a blue phone handset icon",
+    "a purple camera icon",
+]
+
+SIMPLE_ILLUSTRATION_CAPTIONS = [
+    "a cyberpunk cityscape at sunset with neon signs",
+    "construction workers on scaffolding working on a building",
+    "a simple mountain landscape at sunset",
+    "a birthday cake with three candles",
+]
+
 train_flickr = harvest_captions(("flickr", "flickr30k"), 512)
 train_icons = harvest_captions(("mm-icons", "mm_icons", "icon", "icons"), 256)
 eval_illustrations = harvest_captions(("illustration", "illustrations"), 24)
 
-if not train_flickr:
-    train_flickr = [
-        "two young girls riding red tricycles",
-        "people sitting around a campfire at night",
-        "a white cat sitting on a black mat",
-        "a man climbing a mountain",
-        "a blue house with a red roof",
-        "a yellow sun over green hills",
-        "a white cloud in a blue sky",
-        "a brown dog sitting on grass",
-        "a black cat with green eyes",
-        "a red car with black wheels",
-        "a small boat on blue water",
-        "a snowman with a black hat",
-        "a pink flower with green leaves",
-        "a birthday cake with three candles",
-        "a hot air balloon in the sky",
-        "a person holding a red umbrella",
-        "a simple mountain landscape at sunset",
-        "a green cactus in a brown pot",
-        "a blue bird flying over a tree",
-        "a cup of coffee with steam",
-        "a smiling face with round eyes",
-    ]
-if not train_icons:
-    train_icons = [
-        "a red apple icon with a green leaf",
-        "a yellow emoji wearing a light blue face mask",
-        "a purple clipboard with yellow and orange accents",
-        "black bars of varying widths arranged like a barcode",
-        "a blue gear settings icon",
-        "a red heart icon on white background",
-        "a green check mark in a circle",
-        "a yellow warning triangle with an exclamation mark",
-        "a gray trash can icon",
-        "a purple music note icon",
-        "a blue envelope mail icon",
-        "a green battery icon half full",
-        "a red location pin icon",
-        "a black magnifying glass search icon",
-        "a blue calendar icon with two rings",
-        "a yellow star icon",
-        "a gray lock icon with a keyhole",
-        "a red shopping cart icon",
-        "a green leaf ecology icon",
-        "a blue phone handset icon",
-        "a purple camera icon",
-    ]
-if not eval_illustrations:
-    eval_illustrations = [
-        "a cyberpunk cityscape at sunset with neon signs",
-        "construction workers on scaffolding working on a building",
-        "a simple mountain landscape at sunset",
-        "a birthday cake with three candles",
-    ]
+train_flickr = list(dict.fromkeys(train_flickr + SIMPLE_FLICKR_CAPTIONS))
+train_icons = list(dict.fromkeys(train_icons + SIMPLE_ICON_CAPTIONS))
+eval_illustrations = list(dict.fromkeys(eval_illustrations + SIMPLE_ILLUSTRATION_CAPTIONS))
 
 (CAPTION_DIR / "flickr30k_captions.txt").write_text("\n".join(train_flickr), encoding="utf-8")
 (CAPTION_DIR / "mm_icons_captions.txt").write_text("\n".join(train_icons), encoding="utf-8")
