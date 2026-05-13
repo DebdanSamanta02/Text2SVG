@@ -53,11 +53,10 @@ python3 kaggle_text2svg_rlrf_notebook.py
 ## Kaggle Free-Tier Profile
 
 The default config is intentionally tiny on update count, but uses the stronger
-4B policy so the first rollouts are more likely to contain real SVG primitives
-without the memory pressure of Qwen3-8B:
+1.7B policy for the lowest-memory Kaggle path:
 
 ```text
-policy: Qwen/Qwen3-4B
+policy: Qwen/Qwen3-1.7B
 policy loading: 4-bit QLoRA
 judge: Qwen/Qwen2.5-VL-3B-Instruct
 train captions: 64 max
@@ -73,7 +72,7 @@ This is for plumbing and reward-shaping experiments on dual T4 GPUs. To move
 toward the paper settings, change the separate config files:
 
 ```text
-policy.json   -> Qwen/Qwen3-8B if memory allows, or longer max_new_tokens if SVGs truncate
+policy.json   -> Qwen/Qwen3-4B or Qwen/Qwen3-8B if memory allows
 reward.json   -> Qwen/Qwen2.5-VL-7B-Instruct, easy + hard prompts
 grpo.json     -> 1000 steps, batch size 32, 16 rollouts
 runtime.json  -> bf16, FSDP full shard on A100-class hardware
