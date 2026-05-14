@@ -13,6 +13,7 @@
   "optimizer": "AdamW",
   "precision": "float16",
   "gradient_accumulation_steps": 1,
+  "logprob_microbatch_size": 1,
   "advantage_normalization": false,
   "log_every": 5,
   "save_every": 40,

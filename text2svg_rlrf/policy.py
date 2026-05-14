@@ -126,7 +126,7 @@ def generate_rollouts(
     return outputs
 
 
-def sequence_logprobs(bundle: PolicyBundle, sequences: torch.Tensor, prompt_lens: torch.Tensor) -> torch.Tensor:
+def _sequence_logprobs_batch(bundle: PolicyBundle, sequences: torch.Tensor, prompt_lens: torch.Tensor) -> torch.Tensor:
     sequences = sequences.to(model_device(bundle.model))
     attention_mask = (sequences != bundle.tokenizer.pad_token_id).long()
     logits = bundle.model(input_ids=sequences, attention_mask=attention_mask).logits
@@ -137,6 +137,22 @@ def sequence_logprobs(bundle: PolicyBundle, sequences: torch.Tensor, prompt_lens
     mask = idxs >= (prompt_lens.to(logp.device).unsqueeze(1) - 1)
     mask = mask & (shift_labels != bundle.tokenizer.pad_token_id)
     return (logp * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1)
+
+
+def sequence_logprobs(
+    bundle: PolicyBundle,
+    sequences: torch.Tensor,
+    prompt_lens: torch.Tensor,
+    microbatch_size: int = 1,
+) -> torch.Tensor:
+    microbatch_size = max(1, microbatch_size)
+    if sequences.size(0) <= microbatch_size:
+        return _sequence_logprobs_batch(bundle, sequences, prompt_lens)
+    parts = []
+    for start in range(0, sequences.size(0), microbatch_size):
+        end = start + microbatch_size
+        parts.append(_sequence_logprobs_batch(bundle, sequences[start:end], prompt_lens[start:end]))
+    return torch.cat(parts, dim=0)
 
 
 def pad_sequences(sequences: List[torch.Tensor], pad_id: int) -> torch.Tensor:
