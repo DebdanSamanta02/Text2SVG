@@ -36,8 +36,6 @@ print("PROJECT_ROOT:", PROJECT_ROOT)
 print("CONFIG_DIR:", CONFIG_DIR)
 print("WORK_ROOT:", WORK_ROOT)
 
-os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
-
 # %% [markdown]
 # ## Install dependencies
 #

@@ -117,7 +117,6 @@ class GRPOConfig:
     optimizer: str
     precision: str
     gradient_accumulation_steps: int
-    logprob_microbatch_size: int
     advantage_normalization: bool
     log_every: int
     save_every: int

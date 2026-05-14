@@ -95,20 +95,10 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
         was_training = bundle.model.training
         bundle.model.eval()
         with torch.no_grad():
-            old_logp = sequence_logprobs(
-                bundle,
-                sequences,
-                prompt_lens_tensor,
-                microbatch_size=cfg.grpo.logprob_microbatch_size,
-            ).detach()
+            old_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor).detach()
         if was_training:
             bundle.model.train()
-        new_logp = sequence_logprobs(
-            bundle,
-            sequences,
-            prompt_lens_tensor,
-            microbatch_size=cfg.grpo.logprob_microbatch_size,
-        )
+        new_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor)
         ratio = torch.exp(new_logp - old_logp)
         clipped_ratio = torch.clamp(ratio, 1.0 - cfg.grpo.clip_epsilon, 1.0 + cfg.grpo.clip_epsilon)
         policy_loss = -torch.min(ratio * advantages, clipped_ratio * advantages).mean()
