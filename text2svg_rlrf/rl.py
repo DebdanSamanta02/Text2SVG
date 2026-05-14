@@ -70,7 +70,7 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
             prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
             for seq in group:
                 prompt_lens.append(prompt_len)
-                decoded.append(bundle.tokenizer.decode(seq, skip_special_tokens=True))
+                decoded.append(bundle.tokenizer.decode(seq[prompt_len:], skip_special_tokens=True))
                 repeated_captions.append(caption)
 
         reward_results = reward_model.score_many(decoded, repeated_captions)

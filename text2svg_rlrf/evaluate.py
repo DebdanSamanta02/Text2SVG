@@ -28,14 +28,19 @@ def evaluate(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
     )
     reward_model = Text2SVGReward(cfg.runtime, cfg.svg, reward_cfg)
     output_dir = Path(cfg.eval.output_dir)
+    svg_dir = output_dir / "svgs"
     output_dir.mkdir(parents=True, exist_ok=True)
+    svg_dir.mkdir(parents=True, exist_ok=True)
     rows: List[Dict] = []
-    for caption in captions:
+    for caption_idx, caption in enumerate(captions):
         prompt = generation_prompt(caption, cfg.policy.prompt_template_file)
         rollout_group = generate_rollouts(bundle, [prompt], cfg.policy, cfg.eval.candidates_per_caption)[0]
+        prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
         for idx, seq in enumerate(rollout_group):
-            text = bundle.tokenizer.decode(seq, skip_special_tokens=True)
+            text = bundle.tokenizer.decode(seq[prompt_len:], skip_special_tokens=True)
             scored = reward_model.score(text, caption)
+            svg_path = svg_dir / f"eval_{caption_idx:03d}_{idx:02d}.svg"
+            svg_path.write_text(scored.render.sanitized_svg, encoding="utf-8")
             rows.append(
                 {
                     "caption": caption,
@@ -46,6 +51,8 @@ def evaluate(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
                     "visible_elements": scored.render.visible_elements,
                     "copied_text": scored.render.copied_text,
                     "parts": scored.parts,
+                    "raw_output": text,
+                    "svg_path": str(svg_path),
                     "svg": scored.render.sanitized_svg,
                 }
             )
