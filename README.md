@@ -38,8 +38,22 @@ Run locally:
 
 ```bash
 cd Text2SVG
+pip install -r requirements.txt
 python3 run_text2svg_rlrf.py --config-dir configs
 ```
+
+The default config now uses repo-local paths:
+
+```text
+data/*.txt
+outputs/
+cache/
+outputs/qwen3_text2svg_grpo_lora
+```
+
+So on a hosted GPU, cloning the repo and running the command above is enough for
+the smoke-test captions. Replace the files under `data/` with larger caption
+files when you are ready.
 
 Kaggle notebook-style script:
 
@@ -50,7 +64,7 @@ cd Text2SVG
 python3 kaggle_text2svg_rlrf_notebook.py
 ```
 
-## Kaggle Free-Tier Profile
+## Experiment Profile
 
 The default config is intentionally tiny on update count, but uses the stronger
 1.7B policy for the Kaggle free-tier experiment profile:
@@ -68,7 +82,7 @@ render canvas: 256px
 judge prompts during training: easy only
 ```
 
-This is for plumbing and reward-shaping experiments on dual T4 GPUs. To move
+This is for plumbing and reward-shaping experiments. To move
 toward the paper settings, change the separate config files:
 
 ```text

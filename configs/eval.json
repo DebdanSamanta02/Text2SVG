@@ -1,9 +1,9 @@
 {
   "enabled": true,
   "caption_files": [
-    "/kaggle/working/text2svg_captions/flickr30k_eval_captions.txt",
-    "/kaggle/working/text2svg_captions/mm_icons_eval_captions.txt",
-    "/kaggle/working/text2svg_captions/mm_illustrations_eval_captions.txt"
+    "../data/flickr30k_eval_captions.txt",
+    "../data/mm_icons_eval_captions.txt",
+    "../data/mm_illustrations_eval_captions.txt"
   ],
   "max_captions": 24,
   "candidates_per_caption": 1,
@@ -13,5 +13,5 @@
     "clip_aesthetic",
     "accurate_qwen2_5_vl_70b"
   ],
-  "output_dir": "/kaggle/working/text2svg_outputs/eval"
+  "output_dir": "outputs/eval"
 }

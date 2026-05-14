@@ -28,6 +28,7 @@ if not (PROJECT_ROOT / "configs").exists() and Path.cwd().joinpath("configs").ex
     PROJECT_ROOT = Path.cwd().resolve()
 WORK_ROOT = Path("/kaggle/working" if IS_KAGGLE else PROJECT_ROOT).resolve()
 CONFIG_DIR = PROJECT_ROOT / "configs"
+ACTIVE_CONFIG_DIR = WORK_ROOT / "text2svg_kaggle_configs"
 CAPTION_DIR = WORK_ROOT / "text2svg_captions"
 OUTPUT_DIR = WORK_ROOT / "text2svg_outputs"
 ADAPTER_DIR = WORK_ROOT / "qwen3_text2svg_grpo_lora"
@@ -192,6 +193,41 @@ print("Flickr train captions:", len(train_flickr))
 print("MM-Icons train captions:", len(train_icons))
 print("Illustration eval captions:", len(eval_illustrations))
 
+if IS_KAGGLE:
+    if ACTIVE_CONFIG_DIR.exists():
+        shutil.rmtree(ACTIVE_CONFIG_DIR)
+    shutil.copytree(CONFIG_DIR, ACTIVE_CONFIG_DIR)
+    overrides = {
+        "runtime.json": {
+            "output_dir": str(OUTPUT_DIR),
+            "cache_dir": str(WORK_ROOT / "text2svg_cache"),
+        },
+        "data.json": {
+            "caption_files": [
+                str(CAPTION_DIR / "flickr30k_captions.txt"),
+                str(CAPTION_DIR / "mm_icons_captions.txt"),
+            ],
+        },
+        "eval.json": {
+            "caption_files": [
+                str(CAPTION_DIR / "flickr30k_eval_captions.txt"),
+                str(CAPTION_DIR / "mm_icons_eval_captions.txt"),
+                str(CAPTION_DIR / "mm_illustrations_eval_captions.txt"),
+            ],
+            "output_dir": str(OUTPUT_DIR / "eval"),
+        },
+        "lora.json": {
+            "output_dir": str(ADAPTER_DIR),
+        },
+    }
+    for file_name, values in overrides.items():
+        path = ACTIVE_CONFIG_DIR / file_name
+        data = json.loads(path.read_text("utf-8"))
+        data.update(values)
+        path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+else:
+    ACTIVE_CONFIG_DIR = CONFIG_DIR
+
 # %% [markdown]
 # ## Inspect the scaled experiment config
 #
@@ -203,7 +239,7 @@ print("Illustration eval captions:", len(eval_illustrations))
 sys.path.insert(0, str(PROJECT_ROOT))
 from text2svg_rlrf.config import load_config, save_resolved_config
 
-cfg = load_config(str(CONFIG_DIR))
+cfg = load_config(str(ACTIVE_CONFIG_DIR))
 save_resolved_config(cfg)
 print(json.dumps({
     "policy": cfg.policy.model_name_or_path,
@@ -224,7 +260,7 @@ print(json.dumps({
 # fewer steps. The main run writes `rlrf_history.json` and the LoRA adapter.
 
 # %%
-cmd = [sys.executable, str(PROJECT_ROOT / "run_text2svg_rlrf.py"), "--config-dir", str(CONFIG_DIR)]
+cmd = [sys.executable, str(PROJECT_ROOT / "run_text2svg_rlrf.py"), "--config-dir", str(ACTIVE_CONFIG_DIR)]
 if os.environ.get("TEXT2SVG_SKIP_EVAL", "0") == "1":
     cmd.append("--skip-eval")
 print("Running:", " ".join(cmd))
